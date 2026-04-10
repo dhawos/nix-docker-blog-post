@@ -11,9 +11,15 @@ Here are the objectives that we must complete both with Docker and Nix :
 * We must deploy it to scaleway using pulumi
 * We must work on arm MacOS and x64 Linux
 
-# Docker
+## Docker
 
 ```bash
 docker build . -t dev-environment
 docker run -it -v $(pwd):/src dev-environment
+```
+
+## Log in to scaleway registry with docker CLI
+
+```bash
+docker login rg.fr-par.scw.cloud/nix-docker-blog-post -u nologin --password-stdin <<< "$SCW_SECRET_KEY"
 ```

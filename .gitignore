@@ -1,0 +1,4 @@
+.direnv
+.pulumi
+.env.secrets
+Pulumi.prod.yaml

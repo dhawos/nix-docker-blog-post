@@ -19,6 +19,7 @@
             pkgs.go
             pkgs.golangci-lint
             pkgs.templ
+            pkgs.scaleway-cli
           ];
         };
       in {
