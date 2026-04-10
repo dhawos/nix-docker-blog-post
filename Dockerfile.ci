@@ -1,0 +1,18 @@
+FROM golang:1.26.2
+ARG PULUMI_VERSION="3.230.0"
+ARG GOLANGCI_LINT_VERSION="2.11.4"
+
+RUN apt-get update && apt-get install wget
+RUN wget "https://get.pulumi.com/releases/sdk/pulumi-v${PULUMI_VERSION}-linux-x64.tar.gz" -O /tmp/pulumi.tar.gz && \
+    tar -xf /tmp/pulumi.tar.gz -C /tmp && \
+    chmod +x /tmp/pulumi/pulumi && \
+    mv /tmp/pulumi/pulumi /bin/pulumi && \
+    pulumi version
+RUN wget "https://github.com/golangci/golangci-lint/releases/download/v${GOLANGCI_LINT_VERSION}/golangci-lint-${GOLANGCI_LINT_VERSION}-linux-amd64.tar.gz" -O /tmp/golangci-lint.tar.gz && \
+    tar -xf /tmp/golangci-lint.tar.gz -C /tmp && \
+    mv /tmp/golangci-lint-${GOLANGCI_LINT_VERSION}-linux-amd64/golangci-lint /tmp/golangci-lint && \
+    chmod +x /tmp/golangci-lint && \
+    mv /tmp/golangci-lint /bin/golangci-lint && \
+    golangci-lint --version
+RUN rm -rf /tmp/* && mkdir /src
+WORKDIR /src
