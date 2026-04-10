@@ -9,7 +9,10 @@ import (
 
 func main() {
 	http.HandleFunc("/bar", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))
+		_, err := fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))
+		if err != nil {
+			log.Println(err)
+		}
 	})
 
 	log.Fatal(http.ListenAndServe(":8080", nil))

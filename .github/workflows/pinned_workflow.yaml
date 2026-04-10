@@ -1,6 +1,8 @@
 name: Run workflow with pinned dependencies
 on:
   push:
+    branches:
+      - main
 
 jobs:
   lint:
