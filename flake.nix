@@ -15,9 +15,10 @@
       builtins.map (system:  let 
         pkgs = import nixpkgs { inherit system; };
         shell = pkgs.mkShell {
-          packages = [ 
+          packages = [
             pkgs.go
             pkgs.golangci-lint
+            pkgs.templ
           ];
         };
       in {

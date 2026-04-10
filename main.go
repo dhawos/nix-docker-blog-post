@@ -1,17 +1,19 @@
 package main
 
 import (
-	"fmt"
-	"html"
 	"log"
 	"net/http"
+
+	"example-app/components"
 )
 
 func main() {
 	http.HandleFunc("/bar", func(w http.ResponseWriter, r *http.Request) {
-		_, err := fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))
+		component := components.Hello(r.URL.Path)
+		err := component.Render(r.Context(), w)
 		if err != nil {
-			log.Println(err)
+			w.WriteHeader(500)
+			return
 		}
 	})
 

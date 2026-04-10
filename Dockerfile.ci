@@ -14,5 +14,7 @@ RUN wget "https://github.com/golangci/golangci-lint/releases/download/v${GOLANGC
     chmod +x /tmp/golangci-lint && \
     mv /tmp/golangci-lint /bin/golangci-lint && \
     golangci-lint --version
+RUN go install github.com/a-h/templ/cmd/templ@v0.3.1001 && \
+    templ version
 RUN rm -rf /tmp/* && mkdir /src
 WORKDIR /src
