@@ -1,0 +1,13 @@
+name: Run workflow with docker
+on:
+  push:
+
+jobs:
+  lint:
+    name: "Lint code"
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/dhawos/nix-docker-blog-post-ci:v0.1.0
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - run: golangci-lint run
