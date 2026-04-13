@@ -1,10 +1,20 @@
 name: Run workflow with unpinned dependencies
 on:
   push:
-    branches:
-      - main
 
 jobs:
+  codegen:
+    name: "Ensure code is generated"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: "go.mod"
+      - name: Setup templ
+        run: go install github.com/a-h/templ/cmd/templ@latest
+      - name: "Ensure code is generated"
+        run: scripts/codegen.sh
   lint:
     name: "Lint code"
     runs-on: ubuntu-latest

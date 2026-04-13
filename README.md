@@ -8,7 +8,7 @@ To do that we will write a basic app in Go using the standard library server.
 Here are the objectives that we must complete both with Docker and Nix :
 
 * We must use golangci-lint to lint the code
-* We must deploy it to scaleway using pulumi
+* We must deploy it to scaleway 
 * We must work on arm MacOS and x64 Linux
 
 ## Docker

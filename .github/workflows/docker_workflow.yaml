@@ -10,6 +10,14 @@ permissions:
   id-token: write
 
 jobs:
+  codegen:
+    name: "Ensure code is generated"
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/dhawos/nix-docker-blog-post-ci:v0.3.0
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - run: scripts/codegen.sh
   lint:
     name: "Lint code"
     runs-on: ubuntu-latest
@@ -21,6 +29,8 @@ jobs:
   test:
     name: "Test code"
     runs-on: ubuntu-latest
+    needs:
+      - codegen
     container:
       image: ghcr.io/dhawos/nix-docker-blog-post-ci:v0.3.0
     steps:
@@ -35,6 +45,7 @@ jobs:
     # Here we don't really need to run in a container since we are only running a docker
     # build, as long as we have the docker binary, we are good
     needs:
+      - codegen
       - lint
       - test
     steps:
