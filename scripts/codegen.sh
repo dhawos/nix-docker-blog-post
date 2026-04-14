@@ -3,4 +3,4 @@
 set -eo pipefail
 
 templ generate
-git diff HEAD~1 --exit-code
+git diff HEAD --exit-code
